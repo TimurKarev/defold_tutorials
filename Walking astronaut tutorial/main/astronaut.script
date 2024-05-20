@@ -4,6 +4,7 @@ function init(self)
 end
 
 function final(self)
+	-- ИЩИ
 	-- Add finalization code here
 	-- Remove this function if not needed
 end
@@ -14,7 +15,7 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
+	-- Add message-handling code here 
 	-- Remove this function if not needed
 end
 
