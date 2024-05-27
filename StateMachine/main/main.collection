@@ -3,8 +3,8 @@ instances {
   id: "cell_go"
   prototype: "/prefabs/cell/cell_go.go"
   position {
-    x: 492.0
-    y: 466.0
+    x: 106.0
+    y: 107.0
     z: 0.0
   }
   rotation {
