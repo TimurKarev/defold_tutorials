@@ -21,8 +21,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 60.0
-    y: 132.0
+    x: 41.0
+    y: 253.0
     z: 0.0
   }
   rotation {
@@ -32,8 +32,28 @@ embedded_instances {
     w: 1.0
   }
   scale3 {
-    x: 0.483979
-    y: 0.424082
+    x: 0.414292
+    y: 0.509679
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "player"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
     z: 1.0
   }
 }
