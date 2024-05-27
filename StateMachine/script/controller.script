@@ -1,17 +1,6 @@
-local function touch_pressed(self)
-	if self.state.field[1] == 0 then 
-		self.state.field[1] = 1
-	elseif self.state.field[1] == 1 then 
-		self.state.field[1] = -1 
-	elseif self.state.field[1] == -1 then
-		self.state.field[1] = 0
-	end
-end
-
-
 function init(self)
-	msg.post(".", "acquire_input_focus")
-	self.state = require("main/state")
+	--msg.post(".", "acquire_input_focus")
+
 end
 
 function final(self)
@@ -21,10 +10,8 @@ function final(self)
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("touch") and action.pressed then
-		touch_pressed(self)
-	end
- end
+
+end
 
 function on_reload(self)
 	-- Add reload-handling code here

@@ -2,36 +2,34 @@ go.property("id", 1) -- <1>
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	self.state = require("main/state")
-
-	if self.state.field[self.id] == 0 then 
-		msg.post("#sprite", 'disable')
-    elseif self.state.field[self.id] > 0 then 
-		msg.post("#sprite", "play_animation", {id = hash("value_x")})
-	elseif 
-		msg.post("#sprite", "play_animation", {id = hash("value_0")}) then
-	end
+	self.main_state = require('main.state')
 end
 
 function update(self, dt)
-	if self.state.field[self.id] == 0 then 
+	local value = self.main_state.field[self.id]
+	if value == 0 then 
 		msg.post("#sprite", 'disable')
-	elseif self.state.field[self.id] > 0 then 
+	elseif value > 0 then 
 		msg.post("#sprite", 'enable')
 		msg.post("#sprite", "play_animation", {id = hash("value_x")})
-	else
-	msg.post("#sprite", 'enable')
+	elseif value < 0 then
+		msg.post("#sprite", 'enable')
 	msg.post("#sprite", "play_animation", {id = hash("value_0")}) 
+	end
 end
 
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+local function touch_pressed(self)
+	if self.main_state.field[self.id] == 0 then 
+		self.main_state.field[self.id] = 1
+	elseif self.main_state.field[self.id] == 1 then 
+		self.main_state.field[self.id] = -1 
+	elseif self.main_state.field[self.id] == -1 then
+		self.main_state.field[self.id] = 0
+	end
 end
 
 function on_input(self, action_id, action)
-
+	if action_id == hash("touch") and action.pressed then
+		touch_pressed(self)
+	end
 end
