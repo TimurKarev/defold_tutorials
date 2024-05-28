@@ -1,0 +1,3 @@
+prototype: "/prefabs/cell/cell_go.go"
+load_dynamically: false
+dynamic_prototype: false

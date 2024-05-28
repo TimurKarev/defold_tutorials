@@ -1,24 +1,4 @@
 name: "main"
-instances {
-  id: "cell_go"
-  prototype: "/prefabs/cell/cell_go.go"
-  position {
-    x: 106.0
-    y: 107.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 0.755601
-    y: 0.875124
-    z: 1.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "level_logic"
@@ -39,10 +19,44 @@ embedded_instances {
   "  property_decls {\n"
   "  }\n"
   "}\n"
+  "components {\n"
+  "  id: \"cell\"\n"
+  "  component: \"/prefabs/factory/cell.factory\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"cell_factory\"\n"
+  "  component: \"/prefabs/factory/cell_factory.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
   ""
   position {
-    x: 0.0
-    y: 0.0
+    x: 98.0
+    y: 99.0
     z: 0.0
   }
   rotation {
