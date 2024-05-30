@@ -19,6 +19,7 @@ end
 go.property("id", 1) -- <1>
 go.property("width", 100)
 go.property("height", 100)
+go.property("controler_url", hash(""))
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
