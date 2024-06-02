@@ -1,30 +1,17 @@
---- TODO(timurkarev) убрать в библиотеку
-local function hit(hit_vector)
-	local x1 = vmath.vector3(hit_vector.x + 100, hit_vector.y, 0)
-	local x2 = vmath.vector3(hit_vector.x - 100, hit_vector.y, 0)
-	local y1 = vmath.vector3(hit_vector.x , hit_vector.y - 100, 0)
-	local y2 = vmath.vector3(hit_vector.x , hit_vector.y + 100, 0)
-	local my_groups = { hash("default")}
-
-	local first = physics.raycast(x1, x2, my_groups)
-	local second = physics.raycast(y1, y2, my_groups)
-
-	if (first ~= nil and second ~= nil and first.id == second.id) then 
-		local id = go.get(first.id .. '#cell', "id")
-		return id
-	else 
-		return 0
-	end
-end
+require 'lib/scripts/input/hit_detectors'
 
 go.property("id", 1)
-go.property("width", 100)
-go.property("height", 100)
-go.property("controler_url", hash(""))
+go.property("size", 100)
 
 function init(self)
+	self.main_state = require 'main/state'
 	msg.post(".", "acquire_input_focus")
-	self.main_state = require('main.state')
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("init") then 
+        self.reciver =  message.reciver
+    end
 end
 
 function update(self, dt)
@@ -40,21 +27,14 @@ function update(self, dt)
 	end
 end
 
-local function touch_pressed(self, id)
-	if self.main_state.field[id] == 0 then 
-		self.main_state.field[id] = 1
-	elseif self.main_state.field[id] == 1 then 
-		self.main_state.field[id] = -1 
-	elseif self.main_state.field[id] == -1 then
-		self.main_state.field[id] = 0
-	end
-end
-
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
-		local id = hit(vmath.vector3(action.x, action.y, 0))
-		if id > 0 and id <= 9  and self.id == id then 
-			touch_pressed(self, id)
+		local hitted_go = raycast_hit_detector(vmath.vector3(action.x, action.y, 0), self.size, {hash("cell")})
+		if hitted_go ~= nil then
+			local cell_id = go.get(hitted_go .. '#cell', "id")
+			if (cell_id == self.id) then
+				msg.post(self.reciver, "pressed", { index = cell_id })
+			end
 		end
 	end
 end
