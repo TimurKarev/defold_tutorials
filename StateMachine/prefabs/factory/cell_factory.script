@@ -3,59 +3,15 @@ function init(self)
 	local component = "#cell"
 	local padding = 30
 	local sell_size = 100
-	local controller_hash = '/level_logic#controller'
+	
 
 	local i = 1
 	local delta = padding + sell_size
 	for x = 1,3 do
 		for y = 1,3 do
-			factory.create(component, vmath.vector3(current.x + x*delta, current.y + y*delta, 0), nil, { id = i, controler_url = hash(controller_hash) }, nil) -- <1>
+			local id = factory.create(component, vmath.vector3(current.x + x*delta, current.y + y*delta, 0), nil, { id = i, size = sell_size}, nil) -- <1>
+			msg.post(id .. '#cell', "init", {reciver = '/level_logic#controller'})
 			i = i + 1
 		end
 	end
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

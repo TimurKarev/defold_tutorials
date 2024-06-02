@@ -18,3 +18,7 @@ function on_reload(self)
 	-- Learn more: https://defold.com/manuals/hot-reload/
 	-- Remove this function if not needed
 end
+
+function on_message(self, message_id, message, sender)
+	print(message.index)
+end
