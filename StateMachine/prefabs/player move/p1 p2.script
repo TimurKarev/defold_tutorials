@@ -1,0 +1,22 @@
+function init(self)
+	self.state = 1
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id==hash("init") then 
+		self.reciver =  message.reciver
+	end
+end
+
+function update(self, dt)
+	local value = self.main_state.field[self.id]
+	if value == 0 then 
+		msg.post("#sprite", 'disable')
+	elseif value > 0 then 
+		msg.post("#sprite", 'enable')
+		msg.post("#sprite", "play_animation", {id = hash("x")})
+	elseif value < 0 then
+		msg.post("#sprite", 'enable')
+	msg.post("#sprite", "play_animation", {id = hash("o")}) 
+	end
+end
