@@ -1,0 +1,12 @@
+function init(self)
+	self.state = 1
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id==hash("init") then 
+		self.reciver =  message.reciver
+	end
+end
+
+function update (self, dt)
+	
