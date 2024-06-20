@@ -3,20 +3,16 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id==hash("init") then 
-		self.reciver =  message.reciver
+	if(message_id == hash("change")) then
+		self.state =  message.value
 	end
 end
 
 function update(self, dt)
-	local value = self.main_state.field[self.id]
-	if value == 0 then 
-		msg.post("#sprite", 'disable')
-	elseif value > 0 then 
-		msg.post("#sprite", 'enable')
-		msg.post("#sprite", "play_animation", {id = hash("x")})
-	elseif value < 0 then
-		msg.post("#sprite", 'enable')
-	msg.post("#sprite", "play_animation", {id = hash("o")}) 
+	local value = self.state
+		if value > 1 then 	 
+		msg.post("#sprite", "play_animation", {id = hash("p2")})
+		elseif value < 1 then
+		msg.post("#sprite", "play_animation", {id = hash("p1")}) 
 	end
 end

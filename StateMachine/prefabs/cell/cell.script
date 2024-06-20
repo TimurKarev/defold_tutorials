@@ -32,7 +32,7 @@ end
 
 function update(self, dt)
 	local value = self.state
-	if value == 0 then 
+	if value == 0 then
 		msg.post("#sprite", 'disable')
 	elseif value > 0 then 
 		msg.post("#sprite", 'enable')
