@@ -39,6 +39,6 @@ function update(self, dt)
 		msg.post("#sprite", "play_animation", {id = hash("x")})
 	elseif value < 0 then
 		msg.post("#sprite", 'enable')
-	msg.post("#sprite", "play_animation", {id = hash("o")}) 
+	    msg.post("#sprite", "play_animation", {id = hash("o")}) 
 	end
 end
