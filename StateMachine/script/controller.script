@@ -1,3 +1,14 @@
+local function check_winning(self)
+	for i, combination in ipairs(self.main_state.result) do
+		if self.main_state.field[combination[1]] ~= 0 then
+			if (self.main_state.field[combination[1]] == self.main_state.field[combination[2]]) and (self.main_state.field[combination[1]] == self.main_state.field[combination[3]]) then
+				self.main_state.game = false
+				print("WIN")
+			end
+		end
+	end 
+end
+
 function init(self)
 	--msg.post(".", "acquire_input_focus")
 	self.main_state = require 'main/state'
@@ -21,20 +32,24 @@ function on_reload(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("pressed") then
-		local cell_id = go.get(sender, "id")
-		if (self.main_state.field[cell_id]) == 0 then
-			local value = 0
-			if (self.main_state.turnP1) then
-				value = -1
-				self.main_state.turnP1 = false
-				self.main_state.turnP2 = true
-			else 
-				value = 1
-				self.main_state.turnP2 = false
-				self.main_state.turnP1 = true
+	if self.main_state.game == true then
+		if message_id == hash("pressed") then
+			local cell_id = go.get(sender, "id")
+			if (self.main_state.field[cell_id]) == 0 then
+				local value = 0
+				if (self.main_state.turnP1) then
+					value = -1
+					self.main_state.turnP1 = false
+					self.main_state.turnP2 = true
+				else 
+					value = 1
+					self.main_state.turnP2 = false
+					self.main_state.turnP1 = true
+				end
+				msg.post(sender, "set", { value = value})
+				self.main_state.field[cell_id] = value
+				check_winning(self)
 			end
-			msg.post(sender, "set", { value = value})
 		end
 	end
 end
