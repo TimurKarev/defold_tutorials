@@ -13,6 +13,6 @@ function update(self, dt)
 		if value > 1 then 	 
 		msg.post("#sprite", "play_animation", {id = hash("p2")})
 		elseif value < 1 then
-		msg.post("#sprite", "play_animation", {id = hash("p1")}) 
+			msg.post("#sprite", "play_animation", {id = hash("p1")}) 
+		end
 	end
-end
