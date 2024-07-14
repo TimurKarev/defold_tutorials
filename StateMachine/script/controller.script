@@ -47,6 +47,19 @@ function on_message(self, message_id, message, sender)
 					self.main_state.turnP1 = true
 				end
 				msg.post(sender, "set", { value = value})
+
+				local turn_value = 1
+
+				if (self.main_state.turnP2 == false and
+				    self.main_state.turnP1 == true) then
+                    turn_value = -1
+				elseif (self.main_state.turnP1 == false and
+					self.main_state.turnP2 == true) then
+					turn_value = 2
+				end
+
+					msg.post("p1 p2","change", {value = turn_value})
+				
 				self.main_state.field[cell_id] = value
 				check_winning(self)
 			end
